@@ -39,6 +39,6 @@ Building a Multi-Tenant Supported RESTful API with Django Rest Framework
 
 The project will be accessible at [http://localhost:8000/](http://localhost:8000/).
 
-###Explanation
+### Explanation
 To make Api support multi tenancy we can use several approach , one of them is to create a separate database schema for each tenant and each tenant have it's own users
 tenants can be identified by a unique identifier ( subdomain or header ) , in this project we used subdomain identifier
