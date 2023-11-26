@@ -16,7 +16,6 @@ Building a Multi-Tenant Supported RESTful API with Django Rest Framework
 
     ```bash
     git clone https://github.com/11Jou/Multi-Tenancy.git
-    cd your-project
     ```
 
 3. Install dependencies:
