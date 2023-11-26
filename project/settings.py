@@ -59,7 +59,6 @@ TENANT_MODEL = "app.Client"
 
 TENANT_DOMAIN_MODEL = "app.Domain"
 
-#AUTH_USER_MODEL = 'app.User'
 
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
@@ -102,8 +101,8 @@ DATABASES = {
         'NAME': 'NewDB',
         'USER': 'postgres',
         'PASSWORD': 'admin1234',
-        'HOST': 'localhost',  # Set to the appropriate host if different
-        'PORT': '5432',       # Set to the appropriate port if different
+        'HOST': 'localhost',  
+        'PORT': '5432',       
     }
 }
 
