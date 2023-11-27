@@ -1,21 +1,26 @@
-from django.test import TestCase
-from django.contrib.auth.models import User
+from django_tenants.test.cases import TenantTestCase
+from django_tenants.test.client import TenantClient
+from django.contrib.auth import get_user_model
 from django.urls import reverse
-from .models import Item
+from app.models import Client 
 
-class YourAppTestCase(TestCase):
+class YourAppTestCase(TenantTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.tenant = Client(schema_name='public', name='Test Tenant')
+        cls.tenant.save()
+
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.client = TenantClient(self.tenant)
+        self.client.login(username='testuser', password='testpassword')
 
     def test_login(self):
         login_url = reverse('login') 
         response = self.client.post(login_url, {'username': 'testuser', 'password': 'testpassword'})
-        print(response.content)
-        self.assertEqual(response.status_code, 200)  
+        self.assertEqual(response.status_code, 200)
 
-    def test_retrive_items(self):
-        self.client.login(username='testuser', password='testpassword')
-        get_item = reverse('items_api')  
-        response = self.client.get(get_item)
-        self.assertEqual(response.status_code, 200)  
-
+    def test_retrieve_items(self):
+        get_item_url = reverse('items_api')
+        response = self.client.get(get_item_url)
+        self.assertEqual(response.status_code, 200)
